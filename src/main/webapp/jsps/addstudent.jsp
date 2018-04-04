@@ -5,11 +5,11 @@
 <html>
 <head>
 <script type="text/javascript">
-	function viewstudent() {
-		document.forms[0].action = "${pageContext.request.contextPath}/viewstudentrequest";
-		document.forms[0].method = "post";
-		document.forms[0].submit();
-	}
+function back() {
+	document.forms[0].action="${pageContext.request.contextPath}/back1";
+//	document.forms[0].method="post";
+	document.forms[0].submit();
+}
 	</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -35,7 +35,7 @@
 </table>
 <input type="submit" value="Register">
 
-<td><input type="button" onclick="viewstudent()"value="View"></td>
+<form><input type="button" onclick="back()" value="Home Page" /></form>
 </form>
 </div>
 

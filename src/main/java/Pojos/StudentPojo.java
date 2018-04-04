@@ -6,13 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="addstudent")
+@Table(name="studentTable")
 public class StudentPojo {
 	
 	
 	@GeneratedValue
 	private Integer id;
 	private String name;
+	
 	@Id
 	private String email;
 	private String course;
