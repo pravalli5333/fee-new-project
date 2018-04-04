@@ -30,7 +30,7 @@ public class AdminService {
 			if(ld.getRole().equals("admin")){
 				return "adminHome";
 			}else{
-				return "accountantHome";
+				return "AccountantSection";
 			}
 
 		} else {

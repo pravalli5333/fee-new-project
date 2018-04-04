@@ -1,9 +1,6 @@
 package com.Controllers;
 
-import java.io.Serializable;
 import java.util.List;
-
-import javax.transaction.Transaction;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -39,37 +36,78 @@ public class EditStudent {
 		return "viewstudent";
 	}
 
+	@RequestMapping(value = "deleterequest", method = RequestMethod.POST)
+	public String deletedetails(@RequestParam("email") String mail, Model model) {
+		System.out.println("delete details");
+		Configuration configure = new AnnotationConfiguration().configure();
+		SessionFactory sf = configure.buildSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		Query deleteQuery = session.createQuery("delete from StudentPojo where email=:uname");
+		deleteQuery.setParameter("uname", mail);
+		deleteQuery.executeUpdate();
+		System.out.println("fetching user details from data base");
+		Query createQuery = session.createQuery("from StudentPojo");
+		@SuppressWarnings("unchecked")
+		List<StudentPojo> list = createQuery.list();
+		session.getTransaction().commit();
+		session.close();
+
+		for (StudentPojo userData : list) {
+			System.out.println(userData.getName());
+		}
+		model.addAttribute("stpojo", list);
+
+		return "editstudent";
+	}
+
 	@RequestMapping(value = "editstudentrequest", method = RequestMethod.POST)
+	public String editstudentrequest(StudentPojo stPojo, Model model) {
+		System.out.println("view details");
+		Configuration configure = new AnnotationConfiguration().configure();
+		SessionFactory sf = configure.buildSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		Query createQuery = session.createQuery("from StudentPojo");
+		@SuppressWarnings("unchecked")
+		List<StudentPojo> list = createQuery.list();
+		session.beginTransaction().commit();
+		model.addAttribute("stpojo", list);
+		return "editstudent";
+	}
+
+	@RequestMapping(value = "editstudentrequest1", method = RequestMethod.POST)
 	public String editstudentdetails(@RequestParam("email") String email, Model model) {
-		
+
 		Configuration configure = new AnnotationConfiguration().configure();
 		SessionFactory sf = configure.buildSessionFactory();
 
 		Session session = sf.openSession();
-		
+
 		Query editQuery = session.createQuery("from StudentPojo where email=:email");
 		editQuery.setParameter("email", email);
 		List<StudentPojo> list = editQuery.list();
-		model.addAttribute("stpojo", list.get(0));
+		model.addAttribute("slist", list);
 		return "updatestudent";
 
 	}
 
 	@RequestMapping(value = "updatestudentrequest", method = RequestMethod.POST)
 	public String updatestudentdetails(StudentPojo stPojo, Model model) {
-		System.out.println("haiiiiiiii");
+		System.out.println("springssssssss");
 		Configuration configure = new AnnotationConfiguration().configure();
 		SessionFactory sf = configure.buildSessionFactory();
 		Session session = sf.openSession();
-
+		
+		System.out.println("The email is: "+stPojo.getEmail());
 		session.saveOrUpdate(stPojo);
-		session.beginTransaction().commit();
 		Query updatequery = session.createQuery("from StudentPojo");
 		List<StudentPojo> list = updatequery.list();
-		session.close();
-		model.addAttribute("edit", list);
+		session.beginTransaction().commit();
+		model.addAttribute("stpojo", list);
+		System.out.println("hkhjkjkj");
 		model.addAttribute("mes", "update successfully");
-		return "updatestudent";
+		return "editstudent";
 	}
 
 }

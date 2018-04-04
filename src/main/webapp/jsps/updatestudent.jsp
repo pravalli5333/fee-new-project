@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,9 +12,9 @@ ${mes}
 
 	<form action="updatestudentrequest" method="post">
 	
-			<core:forEach var="stpojo" items="${edit}">
+			<c:forEach var="stpojo" items="${slist}">
 <table>
-<tr><td>ID:</td><td><input type="text" name="id" value="${stpojo.id}" readonly="readonly"></td></tr>
+ <tr><td>ID:</td><td><input type="text" name="id" value="${stpojo.id}" readonly="readonly"></td></tr> 
 	<tr><td>Name:</td><td><input type="text" name="name" value="${stpojo.name}"></td></tr>
 	<tr><td>Email:</td><td><input type="text" name="email" value="${stpojo.email}" readonly="readonly"></td></tr>
 	<tr><td>Course:</td><td><input type="text" name="course" value="${stpojo.course}"></td></tr>
@@ -26,11 +27,11 @@ ${mes}
 	<tr><td>Country:</td><td><input type="text" name="country" value="${stpojo.country}"></td></tr>
 	<tr><td>PhoneNum:</td><td><input type="text" name="phonenum" value="${stpojo.phonenum}"></td></tr>
 	
-			</core:forEach>
+			</c:forEach>
 
 
 
-		<td><input type="submit"  value="Upadte"></td>
+		<td><input type="submit"  value="Update"></td>
 		
 </body>
 </html>

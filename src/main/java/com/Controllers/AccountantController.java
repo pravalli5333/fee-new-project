@@ -23,9 +23,19 @@ public class AccountantController {
 		return view;
 		}
 	
+	@RequestMapping(value="/addStudent",method = RequestMethod.POST)
+	public String addStudent(){
+		return"addstudent";
+	}
+
 	@RequestMapping(value="/back")
 	public String back(){
 		return"adminHome";
+	}
+	
+	@RequestMapping(value="/back1")
+	public String back1(){
+		return"AccountantSection";
 	}
 	
 

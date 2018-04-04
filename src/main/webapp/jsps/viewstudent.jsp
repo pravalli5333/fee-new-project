@@ -5,22 +5,19 @@
 <html>
 <head>
 <script type="text/javascript">
- 	function viewstudent() {
-		document.forms[0].action = "${pageContext.request.contextPath}/viewstudentrequest";
-		document.forms[0].method = "post";
-		document.forms[0].submit();
-	} 
-	function editstudent(email) {
-		document.forms[0].action = "${pageContext.request.contextPath}/editstudentrequest?email="+email;
-		document.forms[0].method = "post";
-		document.forms[0].submit();
-	}
+
+ 		function back() {
+ 			document.forms[0].action="${pageContext.request.contextPath}/back1";
+// 			document.forms[0].method="post";
+ 			document.forms[0].submit();
+ 		}
 	
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
+${mes}
 <font color="green"><h1>View Student</h1></font>
 	<form action="viewstudentrequest" method="post">
 		<table border="2">
@@ -37,7 +34,6 @@
 				<th>State</th>
 				<th>Country</th>
 				<th>PhoneNum</th>
-				<th>Edit</th>
 			</tr>
 			<core:forEach var="stpojo" items="${view}">
 				<tr>
@@ -53,14 +49,10 @@
 					<td>${stpojo.state}</td>
 					<td>${stpojo.country}</td>
 					<td>${stpojo.phonenum}</td>
-
-				
-					
-					<td><input type="button" onclick="editstudent('${stpojo.email}')" value="Edit"></td>
-					
 				</tr>
 			</core:forEach>
 		</table>
+		<form><input type="button" onclick="back()" value="Home Page" /></form>
 	</form>
 </body>
 </html>

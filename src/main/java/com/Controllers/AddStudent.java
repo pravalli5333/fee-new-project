@@ -27,7 +27,7 @@ public class AddStudent {
 		session.beginTransaction().commit();
 		
 		model.addAttribute("message", "Registered Sucesfully");
-		return "addstudent";
+		return "resultacc";
 		
 	}
 	
